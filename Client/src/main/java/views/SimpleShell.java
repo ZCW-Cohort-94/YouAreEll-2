@@ -19,11 +19,14 @@ public class SimpleShell {
 
     public static void prettyPrint(String output) {
         // yep, make an effort to format things nicely, eh?
-        System.out.println(output);
+//        System.out.println(output);
+        String[] lines = output.split("},");
+        for (String line : lines) {
+            System.out.println("    " + line);
+        }
+        System.out.println();
     }
-    public static void cleanMessages(){
 
-    }
     public static void main(String[] args) throws java.io.IOException {
 
         YouAreEll webber = new YouAreEll(new MessageController(), new IdController());
