@@ -2,6 +2,13 @@ package youareell;
 
 import controllers.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
+
 public class YouAreEll {
 
     TransactionController tt;
@@ -14,7 +21,7 @@ public class YouAreEll {
         this(new TransactionController(m,i));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // hmm: is this Dependency Injection?
         YouAreEll urlhandler = new YouAreEll(
             new TransactionController(
@@ -24,15 +31,29 @@ public class YouAreEll {
         System.out.println(urlhandler.makeURLCall("/messages", "GET", ""));
     }
 
-    private String makeURLCall(String s, String get, String s1) {
-        return null;
+    private String makeURLCall(String area, String type, String extra) throws IOException {
+        URL url = new URL("http://zipcode.rocks:8085" + area);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod(type);
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        String inputLine;
+        StringBuilder s = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            s.append(inputLine).append("\n");
+        }
+        in.close();
+        System.out.println(s);
+        return s.toString();
     }
 
     public String get_ids() {
         return tt.makecall("/ids", "GET", "");
     }
 
-    public String get_messages() {
+    public String get_messages() throws IOException {
         return makeURLCall("/messages", "GET", "");
     }
 

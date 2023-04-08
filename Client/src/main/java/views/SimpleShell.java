@@ -50,20 +50,7 @@ public class SimpleShell {
                 continue;
             }
             if (commandLine.equals("messages")){
-                URL url = new URL("http://zipcode.rocks:8085/messages");
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                String inputLine;
-                StringBuilder s = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    s.append(inputLine).append("\n");
-                }
-                in.close();
-                System.out.println(s);
+                webber.get_messages();
             }
             if (commandLine.equals("exit")) {
                 System.out.println("bye!");
