@@ -32,15 +32,15 @@ public class TransactionController {
         URL url = new URL("http://zipcode.rocks:8085" + area);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod(type);
-        String id =  area.split("/")[2];
-        System.out.println(id);
+        String[] messageArr = s1.split("<;'>"); //this is dumb and hacky but it works,
 
         if(type.equals("POST")){
+            String id =  area.split("/")[2];
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
             try(OutputStream os = con.getOutputStream()) { //the blank timestamp was messing me up, but it worked if i just gave it a bad one :shrug emoji:
-                String jsonInputString = "{\"sequence\": \"-\", \"timestamp\": \"2023-04-08T18:29:05.604264239Z\", \"fromid\": \"" + id +"\", \"toid\": \"\", \"message\": \""+ s1 +"\"}";
+                String jsonInputString = "{\"sequence\": \"-\", \"timestamp\": \"2023-04-08T18:29:05.604264239Z\", \"fromid\": \"" + id +"\", \"toid\": \"" + messageArr[1] +"\", \"message\": \""+ messageArr[0] +"\"}";
                 System.out.println(jsonInputString);
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);
