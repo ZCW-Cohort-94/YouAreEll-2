@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +43,25 @@ public class SimpleShell {
             List<String> list = new ArrayList<String>();
 
             //if the user entered a return, just loop again
-            if (commandLine.equals(""))
+            if (commandLine.equals("")) {
                 continue;
+            }
+            if (commandLine.equals("messages")){
+                URL url = new URL("http://zipcode.rocks:8085/messages");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                String inputLine;
+                StringBuilder s = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    s.append(inputLine).append("\n");
+                }
+                in.close();
+                System.out.println(s);
+            }
             if (commandLine.equals("exit")) {
                 System.out.println("bye!");
                 break;
