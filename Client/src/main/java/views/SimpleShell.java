@@ -21,6 +21,9 @@ public class SimpleShell {
         // yep, make an effort to format things nicely, eh?
         System.out.println(output);
     }
+    public static void cleanMessages(){
+
+    }
     public static void main(String[] args) throws java.io.IOException {
 
         YouAreEll webber = new YouAreEll(new MessageController(), new IdController());
