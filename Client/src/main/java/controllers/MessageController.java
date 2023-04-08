@@ -9,7 +9,7 @@ import models.Message;
 public class MessageController {
 
     private HashSet<Message> messagesSeen;
-    // why a HashSet??
+    // why a HashSet?? //unique ids from sequence
 
     public ArrayList<Message> getMessages() {
         return null;
