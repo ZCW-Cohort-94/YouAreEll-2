@@ -93,12 +93,14 @@ public class SimpleShell {
 
                 if(list.contains("send")){
                     if(list.size() == 3){
-                        String results = webber.send_all(list.get(1), list.get(2));
+                        String results = webber.send_all(list.get(1), list.get(2) + "<;'>");
                         SimpleShell.prettyPrint(results);
                         continue;
                     }
-                    if(list.size() == 5){
-
+                    if(list.size() == 5 && list.get(3).equals("to")){
+                        String results = webber.send_all(list.get(1), list.get(2) + "<;'>" + list.get(4));
+                        SimpleShell.prettyPrint(results);
+                        continue;
                     }
                 }
 
