@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import controllers.IdController;
 import controllers.MessageController;
@@ -44,29 +46,25 @@ public class SimpleShell {
             System.out.println("cmd? ");
             commandLine = console.readLine();
 
-            //input parsed into array of strings(command and arguments)
-            String[] commands = commandLine.split(" ");
             List<String> list = new ArrayList<String>();
 
+
+            Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(commandLine);
+            while (m.find()) {//solution from https://stackoverflow.com/questions/7804335/split-string-on-spaces-in-java-except-if-between-quotes-i-e-treat-hello-wor
+                list.add(m.group(1).replace("\"", "")); //i get the concept but the regex is above me
+            }
             //if the user entered a return, just loop again
             if (commandLine.equals("")) {
                 continue;
             }
-//            if (commandLine.equals("messages")){
-//                webber.get_messages();
-//            }
+
             if (commandLine.equals("exit")) {
                 System.out.println("bye!");
                 break;
             }
 
-            //loop through to see if parsing worked
-            for (int i = 0; i < commands.length; i++) {
-                //System.out.println(commands[i]); //***check to see if parsing/split worked***
-                list.add(commands[i]);
 
-            }
-            System.out.print(list); //***check to see if list was added correctly***
+            System.out.println(list); //***check to see if list was added correctly***
             history.addAll(list);
             try {
                 //display history of shell with index
@@ -92,6 +90,17 @@ public class SimpleShell {
                     continue;
                 }
                 // you need to add a bunch more.
+
+                if(list.contains("send")){
+                    if(list.size() == 3){
+                        String results = webber.send_all(list.get(1), list.get(2));
+                        SimpleShell.prettyPrint(results);
+                        continue;
+                    }
+                    if(list.size() == 5){
+
+                    }
+                }
 
                 //!! command returns the last command in history
                 if (list.get(list.size() - 1).equals("!!")) {
@@ -123,7 +132,7 @@ public class SimpleShell {
 
             } catch (Exception e) { //this feels wrong
                 System.out.println("Input Error, Please try again!");
-                //throw new RuntimeException(e);
+                throw new RuntimeException(e);
             }
 
             //catch ioexception, output appropriate message, resume waiting for input
