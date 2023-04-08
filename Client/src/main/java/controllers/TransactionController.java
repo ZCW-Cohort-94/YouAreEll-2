@@ -41,7 +41,6 @@ public class TransactionController {
             s.append(inputLine).append("\n");
         }
         in.close();
-        System.out.println(s);
         return s.toString();
     }
 }
