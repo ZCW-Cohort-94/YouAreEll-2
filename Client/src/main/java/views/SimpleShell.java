@@ -21,7 +21,7 @@ public class SimpleShell {
     }
     public static void main(String[] args) throws java.io.IOException {
 
-        YouAreEll urll = new YouAreEll(new MessageController(), new IdController());
+        YouAreEll webber = new YouAreEll(new MessageController(), new IdController());
         
         String commandLine;
         BufferedReader console = new BufferedReader
@@ -109,12 +109,15 @@ public class SimpleShell {
                 // br.close();
 
 
+            } catch (Exception e) { //this feels wrong
+                System.out.println("Input Error, Please try again!");
+                //throw new RuntimeException(e);
             }
 
             //catch ioexception, output appropriate message, resume waiting for input
-            catch (IOException e) {
-                System.out.println("Input Error, Please try again!");
-            }
+//            catch (IOException e) {
+//                System.out.println("Input Error, Please try again!");
+//            }
             // So what, do you suppose, is the meaning of this comment?
             /** The steps are:
              * 1. parse the input to obtain the command and any parameters
