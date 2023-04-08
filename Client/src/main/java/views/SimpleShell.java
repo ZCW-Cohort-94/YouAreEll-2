@@ -46,9 +46,9 @@ public class SimpleShell {
             if (commandLine.equals("")) {
                 continue;
             }
-            if (commandLine.equals("messages")){
-                webber.get_messages();
-            }
+//            if (commandLine.equals("messages")){
+//                webber.get_messages();
+//            }
             if (commandLine.equals("exit")) {
                 System.out.println("bye!");
                 break;

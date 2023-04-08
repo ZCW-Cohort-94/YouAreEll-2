@@ -50,11 +50,19 @@ public class YouAreEll {
     }
 
     public String get_ids() {
-        return tt.makecall("/ids", "GET", "");
+        try {
+            return tt.makecall("/ids", "GET", "");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String get_messages() throws IOException {
-        return makeURLCall("/messages", "GET", "");
+        try {
+            return tt.makecall("/messages", "GET", "");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
