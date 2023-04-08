@@ -65,5 +65,13 @@ public class YouAreEll {
         }
     }
 
+    public String send_all(String id, String message){
+        try {
+            return tt.makecall("/ids/" + id + "/messages", "POST", message);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
