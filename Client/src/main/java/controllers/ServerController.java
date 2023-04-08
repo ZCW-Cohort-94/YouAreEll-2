@@ -1,6 +1,8 @@
 package controllers;
 
 import models.Id;
+
+import javax.json.JsonString;
 //import spiffyUrlManipulator;
 
 public class ServerController {
@@ -14,13 +16,13 @@ public class ServerController {
         return svr;
     }
 
-    public String idGet() { //used to be JsonString, maybe revert?
+    public JsonString idGet() { //used to be JsonString, maybe revert?
         // url -> /ids/
         // send the server a get with url
         // return json from server
         return null;
     }
-    public String idPost(Id id) {//used to be JsonString, maybe revert?
+    public JsonString idPost(Id id) {//used to be JsonString, maybe revert?
         // url -> /ids/
         // create json from Id
         // request
@@ -28,7 +30,7 @@ public class ServerController {
         // return json
         return null;
     }
-    public String idPut(Id id) {//used to be JsonString, maybe revert?
+    public JsonString idPut(Id id) {//used to be JsonString, maybe revert?
         // url -> /ids/
         return null;
     }
