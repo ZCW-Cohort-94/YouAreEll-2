@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,6 +67,7 @@ public class SimpleShell {
 
             System.out.println(list); //***check to see if list was added correctly***
             history.addAll(list);
+            String results;
             try {
                 //display history of shell with index
                 if (list.get(list.size() - 1).equals("history")) {
@@ -78,14 +80,24 @@ public class SimpleShell {
 
                 // ids
                 if (list.contains("ids")) {
-                    String results = webber.get_ids();
+                    if(list.size() == 3){
+                        results = webber.register(list.get(1),list.get(2));
+                        SimpleShell.prettyPrint(results);
+                        continue;
+                    }
+                    results = webber.get_ids();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
 
                 // messages
                 if (list.contains("messages")) {
-                    String results = webber.get_messages();
+                    if(list.size() > 1){
+                        results = webber.get_usr_message(list.get(1));
+                        SimpleShell.prettyPrint(results);
+                        continue;
+                    }
+                    results = webber.get_messages();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
@@ -93,12 +105,12 @@ public class SimpleShell {
 
                 if(list.contains("send")){
                     if(list.size() == 3){
-                        String results = webber.send_all(list.get(1), list.get(2) + "<;'>");
+                        results = webber.send_all(list.get(1), list.get(2));
                         SimpleShell.prettyPrint(results);
                         continue;
                     }
                     if(list.size() == 5 && list.get(3).equals("to")){
-                        String results = webber.send_all(list.get(1), list.get(2) + "<;'>" + list.get(4));
+                        results = webber.send_to(list.get(1), list.get(2), list.get(4));
                         SimpleShell.prettyPrint(results);
                         continue;
                     }
