@@ -1,18 +1,19 @@
 package controllers;
 
 import models.Id;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionController {
     private String rootURL = "http://zipcode.rocks:8085";
@@ -51,6 +52,24 @@ public class TransactionController {
         con.setRequestMethod("GET");
         String result = process(con);
         return Arrays.asList(result.split(",")).contains("\"github\":\""+ id + "\"}");
+    }
+    public void IdController() throws IOException {
+        // Get ids from server
+        URL url = new URL("http://zipcode.rocks:8085/ids");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        String result = process(con);
+
+        // Parse into JSON
+        JSONArray jsonArray = new JSONArray(result);
+
+        // Convert from JSON to map
+        Map<String, String> idMap = new HashMap<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            String githubId = jsonObject.getString("github");
+            idMap.put(githubId);
+        }
     }
 
     public String get(String area) throws IOException {
