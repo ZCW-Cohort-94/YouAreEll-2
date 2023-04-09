@@ -3,6 +3,7 @@ package controllers;
 import models.Id;
 
 import javax.json.JsonString;
+import java.net.HttpURLConnection;
 //import spiffyUrlManipulator;
 
 public class ServerController {
@@ -16,7 +17,11 @@ public class ServerController {
         return svr;
     }
 
-    public JsonString idGet() { //used to be JsonString, maybe revert?
+    public JsonString idGet() {
+//        HttpURLConnection Hcon= new HttpURLConnection();
+//        Hcon.connect();
+
+        //used to be JsonString, maybe revert?
         // url -> /ids/
         // send the server a get with url
         // return json from server

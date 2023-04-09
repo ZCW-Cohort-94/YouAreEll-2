@@ -1,18 +1,19 @@
 package controllers;
 
 import models.Id;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionController {
     private String rootURL = "http://zipcode.rocks:8085";
@@ -28,11 +29,11 @@ public class TransactionController {
         return null;
     }
 
-    public String postId(String idtoRegister, String githubName) {
-        Id tid = new Id(idtoRegister, githubName);
-        tid = idCtrl.postId(tid);
-        return ("Id registered.");
-    }
+//    public String postId(String idtoRegister, String githubName) {
+////        Id tid = new Id(idtoRegister, githubName);
+//        tid = idCtrl.postId(tid);
+//        return ("Id registered.");
+//    }
 
 
     public String process(HttpURLConnection con) throws IOException {
@@ -54,6 +55,7 @@ public class TransactionController {
         String result = process(con);
         return Arrays.asList(result.split(",")).contains("\"github\":\""+ id + "\"}");
     }
+
 
     public String get(String area) throws IOException {
         URL url = new URL("http://zipcode.rocks:8085" + area);
