@@ -131,7 +131,7 @@ public class SimpleShell {
                     pb.command(list);
                 }
 
-                if(list.contains("Set")){
+                if(list.contains("set")){
                     webber.set(list.get(1));
                     continue;
                 }

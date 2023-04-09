@@ -56,7 +56,7 @@ public class YouAreEll {
 
     public String send_to(String id, String message, String toId) {
         try {
-            return tt.send_to("/ids/" + id + "/messages", "POST", message);
+            return tt.send_to("/ids/" + id + "/messages", message, toId);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -79,6 +79,7 @@ public class YouAreEll {
     }
 
     public void set(String id){
-        System.out.println("call tt.setMyId");
+        tt.testIDC();
+        //System.out.println("call tt.setMyId");
     }
 }

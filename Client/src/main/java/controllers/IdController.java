@@ -39,6 +39,11 @@ public class IdController {
     public Id putId(Id id) {
         return null;
     }
+
+    public boolean isRegistered(String id){
+        return allIds.containsKey(id);
+    }
+
     public IdController() throws IOException {
         // Get ids from server
         URL url = new URL("http://zipcode.rocks:8085/ids");
@@ -70,5 +75,13 @@ public class IdController {
         in.close();
         return s.toString();
     }
- 
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for(Id id : allIds.values()){
+            s.append(id.toString()).append("\n");
+        }
+        return s.toString();
+    }
 }
