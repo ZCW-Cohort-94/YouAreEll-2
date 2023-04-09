@@ -20,6 +20,8 @@ public class TransactionController {
     private IdController idCtrl;
 
     public TransactionController(MessageController m, IdController j) {
+        msgCtrl = m;
+        idCtrl = j;
     }
 
     public List<Id> getIds() {

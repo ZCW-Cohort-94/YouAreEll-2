@@ -16,6 +16,10 @@ public class IdController {
         return new ArrayList<>(allIds.values());
     }
 
+    public void setMyId(Id id){
+        myId = id;
+    }
+
     public Id postId(Id id) {
         // create json from id
         // call server, get json result Or error

@@ -77,4 +77,8 @@ public class YouAreEll {
             throw new RuntimeException(e);
         }
     }
+
+    public void set(String id){
+        System.out.println("call tt.setMyId");
+    }
 }
