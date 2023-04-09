@@ -23,6 +23,8 @@ public class SimpleShell {
     public static void prettyPrint(String output) {
         // yep, make an effort to format things nicely, eh?
 //        System.out.println(output);
+        output = output.replace("\"", "");
+        output = output.replace("{", "");
         String[] lines = output.split("},");
         for (String line : lines) {
             System.out.println("    " + line);
