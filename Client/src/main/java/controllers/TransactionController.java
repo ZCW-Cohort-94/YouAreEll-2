@@ -27,11 +27,11 @@ public class TransactionController {
         return null;
     }
 
-    public String postId(String idtoRegister, String githubName) {
-        Id tid = new Id(idtoRegister, githubName);
-        tid = idCtrl.postId(tid);
-        return ("Id registered.");
-    }
+//    public String postId(String idtoRegister, String githubName) {
+////        Id tid = new Id(idtoRegister, githubName);
+//        tid = idCtrl.postId(tid);
+//        return ("Id registered.");
+//    }
 
 
     public String process(HttpURLConnection con) throws IOException {
@@ -53,24 +53,7 @@ public class TransactionController {
         String result = process(con);
         return Arrays.asList(result.split(",")).contains("\"github\":\""+ id + "\"}");
     }
-    public void IdController() throws IOException {
-        // Get ids from server
-        URL url = new URL("http://zipcode.rocks:8085/ids");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        String result = process(con);
 
-        // Parse into JSON
-        JSONArray jsonArray = new JSONArray(result);
-
-        // Convert from JSON to map
-        Map<String, String> idMap = new HashMap<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            String githubId = jsonObject.getString("github");
-            idMap.put(githubId);
-        }
-    }
 
     public String get(String area) throws IOException {
         URL url = new URL("http://zipcode.rocks:8085" + area);
